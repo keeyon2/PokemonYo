@@ -17,7 +17,8 @@ var apiTok = require('./ApiToken.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+//var port = process.env.PORT || 8080;        // set our port
+var port = 80;
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -33,7 +34,7 @@ router.route('/testyo')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("We have received a yo");
-
+        request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
     })
 
 // more routes for our API will happen here
