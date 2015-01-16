@@ -33,8 +33,56 @@ router.get('/', function(req, res) {
 router.route('/testyo')
     .get(function (req, res) {
         //Send a Yo Back
-        console.log("We have received a yo");
-        request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
+        //console.log("We have received a yo");
+        //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
+    })
+
+router.route('/up')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Up");
+    })
+
+router.route('/down')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Down");
+    })
+
+router.route('/left')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Left");
+    })
+
+router.route('/right')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Right");
+    })
+
+router.route('/a')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received A");
+    })
+
+router.route('/b')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received B");
+    })
+
+router.route('/Select')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Select");
+    })
+
+router.route('/Start')
+    .get(function (req, res) {
+        //Send a Yo Back
+        console.log("Received Start");
     })
 
 // more routes for our API will happen here
@@ -47,4 +95,7 @@ app.use('/yo/pokemon', router);
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
 //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
+//
+
