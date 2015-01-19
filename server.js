@@ -8,33 +8,30 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var request = require('request');
-var apiTok = require('./ApiToken.js');
-
-//request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
-
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-//var port = process.env.PORT || 8080;        // set our port
+var multer = require('multer');
+var secretInfo= require('./SecretInfo.js');
+var mongoose = require('mongoose');
 var port = 80;
+
+//Connect to Database
+// =============================================================================
+mongoose.connect(secretInfo.mongoDBinfo.fullString);
 
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
-    console.log('We have sent our response');
+router.use('/', function(req, res, next) {
+    //res.json({ message: 'hooray! welcome to our api!' });   
+    console.log('Received yo from: ' + req.query.username);
+    next();
 });
 
 router.route('/testyo')
     .get(function (req, res) {
-        //Send a Yo Back
-        //console.log("We have received a yo");
-        //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
+        console.log("We are in TestYo");
+        //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok["testYo"] }});
     })
 
 router.route('/up')
@@ -53,6 +50,7 @@ router.route('/left')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("Received Left");
+
     })
 
 router.route('/right')
@@ -87,6 +85,12 @@ router.route('/Start')
 
 // more routes for our API will happen here
 
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true })); // parsing x-www-form-urlencoded
+app.use(bodyParser.json()); // parsing json
+app.use(multer()); // parsing multipart/form-data
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/yo/pokemon', router);
@@ -95,7 +99,4 @@ app.use('/yo/pokemon', router);
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
 //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
-//
-
