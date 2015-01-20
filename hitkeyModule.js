@@ -6,4 +6,4 @@ function hitKey(key) {
     );
 }
 
-module.exports = hitkey;
+module.exports = hitKey;
