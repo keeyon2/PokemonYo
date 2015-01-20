@@ -54,6 +54,16 @@ router.use('/', function(req, res, next) {
 router.route('/testyo')
     .get(function (req, res) {
         console.log("We are in TestYo");
+        /*var applescript = require('child_process').spawn(
+            'osascript', 
+            ["hitkey.scpt"]
+        );*/
+        var autohotkey = require('child_process').spawn(
+            'autohotkey.exe',
+            ["hitkey.ahk",
+             "S"]
+        );
+             
         //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok["testYo"] }});
     })
 
@@ -82,25 +92,25 @@ router.route('/right')
         console.log("Received Right");
     })
 
-router.route('/a')
+router.route('/A')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("Received A");
     })
 
-router.route('/b')
+router.route('/B')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("Received B");
     })
 
-router.route('/Select')
+router.route('/select')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("Received Select");
     })
 
-router.route('/Start')
+router.route('/start')
     .get(function (req, res) {
         //Send a Yo Back
         console.log("Received Start");
