@@ -11,6 +11,7 @@ var request = require('request');
 var multer = require('multer');
 var secretInfo= require('./SecretInfo.js');
 var mongoose = require('mongoose');
+var User = require('./models/user');
 var port = 80;
 
 //Connect to Database
@@ -21,10 +22,32 @@ mongoose.connect(secretInfo.mongoDBinfo.fullString);
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.use('/', function(req, res, next) {
-    //res.json({ message: 'hooray! welcome to our api!' });   
-    console.log('Received yo from: ' + req.query.username);
+    //console.log('Received yo from: ' + req.query.username);
+    // Add username or update count
+    var UsersWithName = User.findOne({name: req.query.username}, function(err, data){
+        if(err)
+            console.log('find error: ' + err);
+    
+        // Create new user
+        if(!data)
+        {
+            User.create({name: req.query.username, count: 1, last_yo_at: Date.now()},
+                function(err, user){
+                    if(err) console.log('creation error: ' + err);
+                });
+        }
+        
+        // Update count and date
+        else
+        {
+            data.count = data.count + 1;
+            data.last_yo_at = Date.now()
+            data.save(function (err) {
+                if(err) console.log("Adding count + 1 error: " + err);
+            });
+        }
+    });
     next();
 });
 
