@@ -12,6 +12,7 @@ var multer = require('multer');
 var secretInfo= require('./SecretInfo.js');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var hitKey = require('./hitkeyModule.js');
 var port = 80;
 
 //Connect to Database
@@ -58,12 +59,7 @@ router.route('/testyo')
             'osascript', 
             ["hitkey.scpt"]
         );*/
-        var autohotkey = require('child_process').spawn(
-            'autohotkey.exe',
-            ["hitkey.ahk",
-             "S"]
-        );
-             
+        hitKey('S'); 
         //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok["testYo"] }});
     })
 
