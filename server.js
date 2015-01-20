@@ -58,42 +58,42 @@ router.route('/testyo')
 
 router.route('/up')
     .get(function (req, res) {
-        hitkey('Up');
+        hitKey('Up');
     })
 
 router.route('/down')
     .get(function (req, res) {
-        hitkey('Down');
+        hitKey('Down');
     })
 
 router.route('/left')
     .get(function (req, res) {
-        hitkey('Left');
+        hitKey('Left');
     })
 
 router.route('/right')
     .get(function (req, res) {
-        hitkey('Right');
+        hitKey('Right');
     })
 
 router.route('/A')
     .get(function (req, res) {
-        hitkey('z');
+        hitKey('z');
     })
 
 router.route('/B')
     .get(function (req, res) {
-        hitkey('x');
+        hitKey('x');
     })
 
 router.route('/select')
     .get(function (req, res) {
-        hitkey('Backspace');
+        hitKey('Backspace');
     })
 
 router.route('/start')
     .get(function (req, res) {
-        hitkey('Enter');
+        hitKey('Enter');
     })
 
 // configure app to use bodyParser()
