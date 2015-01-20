@@ -24,7 +24,6 @@ mongoose.connect(secretInfo.mongoDBinfo.fullString);
 var router = express.Router();              // get an instance of the express Router
 
 router.use('/', function(req, res, next) {
-    //console.log('Received yo from: ' + req.query.username);
     // Add username or update count
     var UsersWithName = User.findOne({name: req.query.username}, function(err, data){
         if(err)
@@ -54,65 +53,48 @@ router.use('/', function(req, res, next) {
 
 router.route('/testyo')
     .get(function (req, res) {
-        console.log("We are in TestYo");
-        /*var applescript = require('child_process').spawn(
-            'osascript', 
-            ["hitkey.scpt"]
-        );*/
-        hitKey('S'); 
-        //request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok["testYo"] }});
+        //hitKey('S'); 
     })
 
 router.route('/up')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Up");
+        hitkey('Up');
     })
 
 router.route('/down')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Down");
+        hitkey('Down');
     })
 
 router.route('/left')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Left");
-
+        hitkey('Left');
     })
 
 router.route('/right')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Right");
+        hitkey('Right');
     })
 
 router.route('/A')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received A");
+        hitkey('z');
     })
 
 router.route('/B')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received B");
+        hitkey('x');
     })
 
 router.route('/select')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Select");
+        hitkey('Backspace');
     })
 
 router.route('/start')
     .get(function (req, res) {
-        //Send a Yo Back
-        console.log("Received Start");
+        hitkey('Enter');
     })
-
-// more routes for our API will happen here
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -121,11 +103,10 @@ app.use(bodyParser.json()); // parsing json
 app.use(multer()); // parsing multipart/form-data
 
 // REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+// all of our routes will be prefixed with /yo/pokemon
 app.use('/yo/pokemon', router);
 
 // START THE SERVER
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
-//request.post('https://api.justyo.co/yoall/', {form: { api_token: apiTok }});
