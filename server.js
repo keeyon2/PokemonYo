@@ -29,7 +29,7 @@ router.use('/', function(req, res, next) {
         if(err)
             console.log('find error: ' + err);
         //We need to calculate correct tab value to have count line up
-        var tabsNumber = 4 - (req.query.username.length / 4)
+        var tabsNumber = 3 - (req.query.username.length / 4)
         var tabsString = '';
         for (i = 0; i < tabsNumber; i++)
         {
