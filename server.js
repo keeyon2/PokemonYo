@@ -36,6 +36,7 @@ router.use('/', function(req, res, next) {
                 function(err, user){
                     if(err) console.log('creation error: ' + err);
                 });
+            console.log("Yo From: " + req.query.username + "         Yo Count: 1");
         }
         
         // Update count and date
@@ -43,6 +44,7 @@ router.use('/', function(req, res, next) {
         {
             data.count = data.count + 1;
             data.last_yo_at = Date.now()
+            console.log("Yo From: " + req.query.username + "         Yo Count: " + data.count);
             data.save(function (err) {
                 if(err) console.log("Adding count + 1 error: " + err);
             });
