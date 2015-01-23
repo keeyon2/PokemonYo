@@ -19,6 +19,25 @@ var port = 80;
 // =============================================================================
 mongoose.connect(secretInfo.mongoDBinfo.fullString);
 
+// Function for Printing Correctly
+// =============================================================================
+function printCorrectly(YoUsername, Count)
+{
+    var totalSpaces = 25
+    var currentSpaces = YoUsername.length;
+    var totalSpaceAdditions = totalSpaces - currentSpaces;
+    var tabsString = '';
+    for (i = 0; i < totalSpaceAdditions; i++)
+    {
+        tabsString = tabsString + ' ';
+    }
+
+    console.log("YO From: " + YoUsername + tabsString + "YO Count: " + Count);
+}
+
+
+
+
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
@@ -28,13 +47,7 @@ router.use('/', function(req, res, next) {
     var UsersWithName = User.findOne({name: req.query.username}, function(err, data){
         if(err)
             console.log('find error: ' + err);
-        //We need to calculate correct tab value to have count line up
-        var tabsNumber = 3 - (req.query.username.length / 4)
-        var tabsString = '';
-        for (i = 0; i < tabsNumber; i++)
-        {
-            tabsString = tabsString + '\t';
-        }
+
         // Create new user
         if(!data)
         {
@@ -42,7 +55,7 @@ router.use('/', function(req, res, next) {
                 function(err, user){
                     if(err) console.log('creation error: ' + err);
                 });
-            console.log("YO From: " + req.query.username + tabsString + "YO Count: 1");
+            printCorrectly(req.query.username, 1);
         }
         
         // Update count and date
@@ -50,7 +63,7 @@ router.use('/', function(req, res, next) {
         {
             data.count = data.count + 1;
             data.last_yo_at = Date.now()
-            console.log("YO From: " + req.query.username + tabsString + "YO Count: " + data.count);
+            printCorrectly(req.query.username, data.count);
             data.save(function (err) {
                 if(err) console.log("Adding count + 1 error: " + err);
             });
